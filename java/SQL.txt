@@ -1,0 +1,156 @@
+table creation
+=============
+
+CREATE TABLE TAB1(SNO NUMBER, NAME VARCHAR2(90), AGE NUMBER, EMAIL VARCHAR2(90));
+
+
+inserting records
+----------------
+
+INSERT INTO TAB1 VALUES(1, 'SAI', 10, 'SAI@GMAIL.COM');
+
+INSERT INTO TAB1(SNO, EMAIL) VALUES(2, 'KUMAR@GMAIL.COM');
+
+updating the record
+-------------------
+
+UPDATE TAB1 SET NAME='VENKAT' WHERE ID = 2;
+UPDATA TAB1 SET NAME='CHANDU' EMAIL='SAI@YAHOO.COM' WHERE ID = 2;
+
+
+deleting records
+----------------
+
+DELETE FROM TAB1(all records will be deleted)
+
+DELETE FROM TAB1 WHERE ID = 2;(to delete particular record)
+	==>we can roll back the records in case of DELETE command
+
+
+
+truncating records
+------------------
+
+TRUNCATE FROM TAB1(all records will be deleted permanently)
+	=> roll back is not possible incase of 'TRUNCATE'
+
+
+deleting a column
+-------------------
+ALTER TABLE TAB1 DROP COLUMN EMAIL;
+
+
+adding a column
+---------------
+
+ALTER TABLE TAB1 ADD COLUMN EMAIL VARCHAR2(90);
+
+
+
+SELECT
+======
+======
+
+SELECT * FROM TAB1;(for displaying all the records of the table)
+SELECT ID, NAME FROM TAB1;(for displaying particular column records from the table)
+SELECT * FROM TAB1 ORDER BY ID;(for displayinf according to particular column order)
+SELECT * FROM TAB1 ORDER BY ID ASC;(ascending order)
+SELECT * FROM TAB1 ORDER BY ID DESC;(descending order)
+SELECT * FROM TAB1 WHERE DEPT = 'SW' ORDER BY SALARY;
+
+count
+-----
+SELECT COUNT(*) FROM TAB1;(to determine total number of records in table)
+
+SUM
+---
+SELECT SUM(AGE) FROM TAB1;
+
+MIN
+---
+SELECT MIN(AGE) FROM TAB1;
+
+MAX
+---
+SELECT MAX(AGE) FROM TAB1;
+
+
+sub-query
+---------
+
+SELECT NAME FROM TAB1 WHERE SALARY = (SELECT MIN(SALARY) FROM TAB1;
+
+2nd max value
+-------------
+
+SELECT MAX(SALARY) FROM TAB1 WHERE SALARY < (SELECT MAX(SALARY) FROM TAB1);
+
+
+not null
+--------
+
+CREATE TABLE TAB1(SNO NUMBER, NAME VARCHAR2(90) NOT NULL, AGE NUMBER);(here name can't be null)
+
+
+unique key
+----------
+
+CREATE TABLE TAB1(SNO NUMBER UNIQUE, NAME VARCHAR2(90), AGE NUMBER);(unique = no duplicates)
+
+
+primary key
+-----------
+
+CREATE TABLE TAB1(SNO NUMBER PRIMARY KEY, NAME VARCHAR2(90), AGE NUMBER;(primary key = not null and unique)
+
+
+constraint
+-----------
+
+CREATE TABLE TAB1(ID NUMBER, NAME VARCHAR2(90), AGE NUMBER, CONSTRAINT PERSON_UK UNIQUE(ID));
+
+
+foreign_key
+-----------
+CREATE TABLE PERSON(ID NUMBER, NAME VARCHAR2(90), AGE NUMBER, EMAIL VARCHAR2(90), CONSTRAINT PERSON_UK UNIQUE(ID));
+
+CREATE TABLE ADDRESS(HOUSE_NO VARCHAR2(90), CITY VARCHAR2(90), STATE VARCHAR2(90), PERSON_ID NUMBER, CONSTRAINT ADDRESS_FK FOREIGN KEY(PERSON_ID) REFERENCES PERSON(ID));
+
+
+
+Joins
+=====
+
+InnerJoin
+---------
+PERSON						ADDRESS
+======						=======
+
+
+SELECT * FROM PERSON INNER JOIN ADDRESS ON PERSON.ID = ADDRESS.ID;
+
+outer join
+----------
+SELECT * FROM PERSON LEFT OUTER JOIN ADDRESS ON PERSON.ID = ADDRESS.ID;
+SELECT * FROM PERSON RIGHT OUTER JOIN ADDRESS ON PERSON.ID  = ADDRESS.ID;
+SELECT * FROM PERSON FULL OUTER JOIN ADDRESS ON PERSON.ID = ADDRESS.ID;
+
+cross join
+----------
+
+SELECT * FROM PERSON CROSS JOIN ADDRESS;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
